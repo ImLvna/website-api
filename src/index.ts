@@ -11,6 +11,10 @@ const router = Router();
 const resJson = (obj: any) =>
 	new Response(JSON.stringify(obj), { headers: { 'content-type': 'application/json' } });
 
+router.get('/', async () => {
+	return new Response(':D');
+});
+
 router.get('/discord', async (request, env: Env) => {
 	return resJson(await getData(env.DISCORD_OWNER_ID, env.DISCORD_BOT_TOKEN));
 });
