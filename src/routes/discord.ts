@@ -4,6 +4,7 @@ interface iDiscordUser {
 	username: string;
 	displayName: string;
 	banner_color: string;
+	banner_url?: string;
 	avatar_url: string;
 	flagImages: { [key: string]: string };
 	id: string;
@@ -49,11 +50,13 @@ export async function getData(ownerId: string, token: string) {
 		},
 	});
 	const json = (await data.json()) as APIUser;
-	console.log(json);
 	const _DiscordUser: iDiscordUser = {
 		username: json.username,
 		displayName: json.global_name || json.username,
 		banner_color: json.accent_color ? `#${json.accent_color?.toString(16)}` : 'unset',
+		banner_url: json.banner
+			? `https://cdn.discordapp.com/banners/${json.id}/${json.banner}.png`
+			: undefined,
 		avatar_url:
 			`https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.png` ||
 			'https://canary.discord.com/assets/1f0bfc0865d324c2587920a7d80c609b.png',
