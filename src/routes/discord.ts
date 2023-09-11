@@ -53,7 +53,7 @@ export async function getData(ownerId: string, token: string) {
 	const _DiscordUser: iDiscordUser = {
 		username: json.username,
 		displayName: json.global_name || json.username,
-		banner_color: `#${json.accent_color?.toString(16)}` || '#27292b',
+		banner_color: json.accent_color ? `#${json.accent_color?.toString(16)}` : 'unset',
 		avatar_url:
 			`https://cdn.discordapp.com/avatars/${json.id}/${json.avatar}.png` ||
 			'https://canary.discord.com/assets/1f0bfc0865d324c2587920a7d80c609b.png',
