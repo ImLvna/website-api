@@ -15,8 +15,13 @@ router.get('/', async () => {
 	return new Response(':D');
 });
 
-router.get('/discord', async (request, env: Env) => {
-	return resJson(await getData(env.DISCORD_OWNER_ID, env.DISCORD_BOT_TOKEN));
+router.get('/discord/:user', async (request, env: Env) => {
+	if (!env[`OWNER_${request.params.user.toUpperCase()}`])
+		return new Response(`No owner id for ${request.params.user}`, { status: 404 });
+
+	return resJson(
+		await getData(env[`OWNER_${request.params.user.toUpperCase()}`], env.DISCORD_BOT_TOKEN)
+	);
 });
 
 export default {
