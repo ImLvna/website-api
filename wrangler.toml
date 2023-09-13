@@ -2,7 +2,7 @@ name = "website-api"
 main = "./src/index.ts"
 compatibility_date = "2022-05-03"
 routes = [
-	{ pattern = "website-api.lvna.gay", custom_domain = true }
+	{ pattern = "website-api.loveh.art", custom_domain = true }
 ]
 
 [vars]
